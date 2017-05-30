@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     // TODO : Still not okay that the movement is extremely smooth.
@@ -15,12 +16,17 @@ public class PlayerController : MonoBehaviour {
     bool grounded = true;    
     bool canDoubleJump;
 
+    public Text countText;
+    private int count;
     
     
     // Use this for initialization
     void Start () {        
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;       
+        rb.freezeRotation = true;
+        count = 0;
+        SetCountText();
+        
     }
 	
 	// Update is called once per frame
@@ -107,6 +113,8 @@ public class PlayerController : MonoBehaviour {
      void OnCollisionEnter(Collision collide)
     {
         
+        
+
         if (rb.velocity.y < 1)
         {
 
@@ -119,8 +127,30 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-    void OnCollisionExit(Collision collide)
+     void OnTriggerEnter(Collider other)
     {
-        
+        if(other.gameObject.CompareTag("Collectable"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+            SetCountText();
+        }
+
+        if (other.gameObject.CompareTag("Boundary"))
+        {
+            Destroy(this.gameObject);
+            
+            countText.text = "You Dead Restart Play  Mode";
+        }
     }
+
+
+
+    void SetCountText()
+    {
+        countText.text = "Count : " + count.ToString();
+
+    }
+
+
 }

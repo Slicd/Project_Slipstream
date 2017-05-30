@@ -34,3 +34,24 @@ sysinfo.txt
 *.unitypackage
 Library/shadercompiler-UnityShaderCompiler.exe0.log
 Library/shadercompiler-UnityShaderCompiler.exe0.log
+*.log
+
+# Ignore the following files
+# --------------------------
+# Unity3D specific
+#
+**/Library/*
+**/Temp/*
+**/*.csproj
+**/*.unityproj
+**/*.sln
+**/*.userprefs
+**/*.pidb
+
+# include meta files
+!*.*.meta
+*.csproj.meta
+*.unityproj.meta
+*.sln.meta
+*.userprefs.meta
+*.pidb.meta
